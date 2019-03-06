@@ -1,13 +1,17 @@
+//TODO: adjust question font-size based on string length (so it doesn't grow too much)
+
+//TODO: on score screen, don't do it by num questions, do it by top score as "100%" which is the max desired height, scale others accordingly.
+
 //TODO: 3 players breaks player 2 input
 
-//TODO: adjust question font-size based on string length (so it doesn't grow too much)
-//TODO: display total questions on score summary (maybe right, wrong, and timed out too???)
+//TODO: display total questions on score summary (maybe right, wrong, and timed out too down in a details pane???)
 //TODO: timeout not always playing sound
 //TODO: make pub/speed modes
 
 var answerScreenTime = 4000; //TODO: set to 4000 (4 seconds to see the right answers)
 var forward = true;
 var ignoreCycles = 0; //How many cycles to ignore the button presses for
+var ignoreLength = 5; //Standard num cycles to ignore (was 3)
 var lockedPlayers = [true,true,true,true]; //Up to 4 players can be locked (then the timer is king)
 var qBuzzCount = 0; //How many players have buzzed in so far for this question
 var qData; //Holds the Quiz Data (Intro, Quips, Questions, Answers, etc...)
@@ -320,6 +324,11 @@ function answer(bNum, pNum) {
     clearInterval(qInterval); //Pause Timer
     $("#timer").stop(); //stop timer shrinking animation
     $('#timerWrap').removeClass('flash'); //ensure flash is off
+
+    //Show right answer, by highlighting wrong ones
+    $('.answer', '#answerTable').addClass('wrong');
+    $('#a'+qA).removeClass('wrong');
+
     questionSchedule(); //Only rub there noses in it for a few seconds before moving on
   } else if(wrong && qStyle == 'buzz') { //In buzz mode, timer resets for others
     //Reset the timer to let others try
@@ -355,7 +364,7 @@ function buzz(pNum) {
   qTimeLeft += 1; //Give them an extra second, in case they buzzed right before time ran out
   $('#timerWrap').removeClass('flash'); //Remove the flasher, in case this puts them back over that limit
   qBuzzCount++;
-  ignoreCycles = 3; //Allow for 3 cycles after a buzz to not accidentally insta-press an answer
+  ignoreCycles = ignoreLength; //Allow for 5 cycles after a buzz to not accidentally insta-press an answer
   who = pNum; //Now we are ONLY listening for their answer
   $('#s'+pNum).addClass('buzzedIn');
   visualBuzzer();
@@ -560,7 +569,7 @@ function gpInput(a) {
     for (var i=0; i<a.length; ++i) {
       if ("b9" in a[i]) { //Just check a[0] if you only want player 1 to press it
         console.log('Start key means we are moving on!');
-        ignoreCycles = 3;
+        ignoreCycles = ignoreLength;
         $('#nextBtn').addClass('invisible'); //Hiding this is an additional flag not to double count the start key
         questionAsk();
       }
