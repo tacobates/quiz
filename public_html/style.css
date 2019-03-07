@@ -35,7 +35,7 @@ h3 {
 #questionPane {
   font-size:300%;
   font-weight:bold;
-  padding:15px 95px; /*don't let it run into scores in corner*/
+  padding:15px 125px; /*don't let it run into scores in corner*/
   text-align:center;
 }
 #quizProgress{
@@ -107,13 +107,13 @@ h3 {
     position:absolute;
     z-index:999; /*Very top*/
     background-color:black;
-    border: solid 4px white;
-    font-size:120%;
-    height:55px;
-    width:90px;
+    border: solid 5px white;
+    font-size:150%;
+    height:65px;
+    width:120px;
     opacity:0.5; /*grayed out until they buzz in*/
     overflow:hidden;
-    padding:4px;
+    padding:5px;
     text-align:center;
     white-space:nowrap;
 }
