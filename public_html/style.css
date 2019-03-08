@@ -33,11 +33,18 @@ h3 {
 
 /******************** QUIZ PANE *********************/
 #questionPane {
-  font-size:300%;
+  font-size:250%;
   font-weight:bold;
   padding:15px 125px; /*don't let it run into scores in corner*/
   text-align:center;
 }
+#questionPane img {
+  height:125px; /*Force small so question doesn't take whole page*/
+  vertical-align:middle;
+}
+#questionPane table { margin:auto; }
+#questionPane table tr { vertical-align:middle; }
+#questionPane table tr td { text-align:center; }
 #quizProgress{
   border:solid 1px #777;
   border-radius:5px;
