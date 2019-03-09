@@ -35,7 +35,7 @@ h3 {
 #questionPane {
   font-size:250%;
   font-weight:bold;
-  padding:15px 125px; /*don't let it run into scores in corner*/
+  padding:15px 177px; /*don't let it run into scores in corner*/
   text-align:center;
 }
 #questionPane img {
@@ -73,15 +73,15 @@ h3 {
 }
 #answerTable td.answer {
   border-radius:25px;
-  font-size:180%;
+  font-size:220%;
   font-weight:bold;
   padding:24px;
   height:150px;
   width:34%;
 }
 #answerTable img {
-  max-height:200px;
-  max-width:450px;
+  max-height:180px;
+  max-width:400px;
 }
 /** These answers correspond to buttons Y, X, B, & A **/
 #a0 { border:solid 6px rgba(255, 255,  61, 0.6); }
@@ -115,9 +115,9 @@ h3 {
     z-index:999; /*Very top*/
     background-color:black;
     border: solid 5px white;
-    font-size:150%;
-    height:65px;
-    width:120px;
+    font-size:190%;
+    height:45px;
+    width:170px;
     opacity:0.5; /*grayed out until they buzz in*/
     overflow:hidden;
     padding:5px;
