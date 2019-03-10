@@ -9,14 +9,6 @@
   <script src="js/gamepad.js"></script>
 </head>
 <body>
-  <!-- DEPRECATED highlighting winner corners / current score approximation -->
-  <!--
-    <div id="corner0" class="invisible"></div>
-    <div id="corner1" class="invisible"></div>
-    <div id="corner2" class="invisible"></div>
-    <div id="corner3" class="invisible"></div>
-  -->
-
   <!-- Displays Control Form to setup the Quiz how you want -->
   <div id="controlPane" class="pane">
     <h3><span id='numPlayers'></span> <span id='numPlayersLabel'>Players</span> Detected</h3>
@@ -63,6 +55,8 @@
 
   <!-- Displays the Score graph at the end of the game -->
   <div id="scorePane" class="pane invisible">
+    <h1 id="winner"></h1>
+
     <table id="scoreTable">
       <tr>
         <td id="graph0" class="invisible"><div id="bar0"></div></td>
@@ -81,8 +75,6 @@
         <td id="score3" class="invisible"></td>
       <tr/>
     </table>
-    
-    <h1 id="winner"></h1>
   </div>
 
   <!-- This pane is not for display, but just holds the audio files for JS to trigger -->

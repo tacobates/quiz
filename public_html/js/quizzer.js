@@ -58,7 +58,22 @@ function quizFetch() {
   qTurns = document.getElementById('turns').value;
   qVoice = document.getElementById('voice').value;
   qStyle = document.getElementById('style').value;
-  //console.log('Skip to Final Score'); qTurns=11; var temp = qTurns - 6; qScores = [5,temp,-1,3]; gpActiveI = [true,true,true,true]; scoreFinal(); return; //Just for Testing Score Pane
+  //For testing the Score Screen GUI
+  var skipToScoreScreen = false; //only for testing
+  if (skipToScoreScreen) {
+    console.log('Skip to Final Score');
+    qNumPlayers=4;
+    qTurns=51;
+    var temp = qTurns - 6;
+    qScores = [25,temp,-1,12];
+    gpActiveI = [true,true,true,true];
+    $('#name0').html(document.getElementById('p0').value);
+    $('#name1').html(document.getElementById('p1').value);
+    $('#name2').html(document.getElementById('p2').value);
+    $('#name3').html(document.getElementById('p3').value);
+    scoreFinal();
+    return; //Just for Testing Score Pane
+  }
   quizGetQuestions(qid);
 }
 /** Get the JSON file for questions for this Quiz **/
@@ -411,6 +426,8 @@ function scoreFinal() {
   //Populate the Score Table (Scores, Graphs, and Names)
   var scaler = getScaler();
   var winners = [];
+  var max = 0;
+  var maxHeight = 350; //Winner's barchart should be 350px tall
 
   for(var i=0; i < qNumPlayers; ++i) {
     //Calculate Winners
@@ -426,14 +443,20 @@ function scoreFinal() {
     $('#score'+i).html(qScores[i] + ' pts'); //player scores
     if (qScores[i] <= 0)
       $('#score'+i).addClass('negative');
-
-    //Make Bar Chart
-    var h = scaler * qScores[i];
-    if (h < 0)
-      h = 0; //No negative bar chart
-    $('#bar'+i).css('height', h+'px'); //Makes the bar chart taller
   }
+
+  //Handle 0 or negative as max score
+  max = qScores[winners[0]];
+  if(max < 1)
+    max = 1; //Avoid divide by 0
+
   for(var i=0; i < qNumPlayers; ++i) {
+    //Make Bar Chart
+    var h = 0;
+    if (qScores[i] > 0) //No negative bar chart
+        h = Math.floor(maxHeight * qScores[i] / max); //Round down
+    $('#bar'+i).css('height', h+'px'); //Makes the bar chart taller
+
     //if (gpActiveI[i]) { //This player touched a button, so show their score
       $('#graph'+i).removeClass('invisible');
       $('#name'+i).removeClass('invisible');

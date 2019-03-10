@@ -221,17 +221,17 @@ h3 {
 
 
 /******************** SCORE PANE ********************/
-#bar0, #bar1, #bar2, #bar3 {margin:auto; width:75px;}
+#bar0, #bar1, #bar2, #bar3 {margin:auto; width:50%;}
 #bar0 {background-color:#fc0;} /*P1 Yellow*/
 #bar1 {background-color:#c00;} /*P2 Red*/
 #bar2 {background-color:#06f;} /*P3 Blue*/
 #bar3 {background-color:#090;} /*P4 Green*/
 
-#scoreTable {margin:auto;}
+#scoreTable {margin:auto; width:66%;}
 #scoreTable tr {vertical-align:bottom;}
 #scoreTable tr td {
-  font-size:180%;
-  padding:1px 15px;
+  font-size:200%;
+  padding:2px 0px;
   text-align:center;
   white-space:nowrap;
 }
@@ -245,51 +245,39 @@ h3 {
 }
 
 #winner {
-  font-size:400%;
-  margin:70px 25px;
+  color: #fff;
+  font-size: 6.5em; /*was 500%*/
+  font-weight: 700;
+  margin:100px 25px;
   text-align:center;
-}
 
-/* DEPRECATED */ #corner0, #corner1, #corner2, #corner3 {display:none;}
-/*
-#corner0, #corner1, #corner2, #corner3 {
-  position:absolute;
-  z-index:1;
-  opacity:0.6;
-  padding:0px;
-  height:2px;
-  width:2px;
+  letter-spacing: -7px;
+  text-transform: uppercase;
+  animation: blur 2s ease-out; /* infinite; */
+  text-shadow: 0px 0px 5px #fff, 0px 0px 7px #fff;
 }
-
-#corner0 {
-  background-color:#fc0;
-  border-bottom-right-radius:300px;
-  box-shadow:0px 0px 8px 5px #fc0;
-  top:0px;
-  left:0px;
+@keyframes blur {
+  from {
+    text-shadow:0px 0px 10px #fff,
+      0px 0px 10px #fff, 
+      0px 0px 25px #fff,
+      0px 0px 25px #fff,
+      0px 0px 25px #fff,
+      0px 0px 25px #fff,
+      0px 0px 25px #fff,
+      0px 0px 25px #fff,
+      0px 0px 50px #fff,
+      0px 0px 50px #fff,
+      0px 0px 50px #7B96B8,
+      0px 0px 150px #7B96B8,
+      0px 10px 100px #7B96B8,
+      0px 10px 100px #7B96B8,
+      0px 10px 100px #7B96B8,
+      0px 10px 100px #7B96B8,
+      0px -10px 100px #7B96B8,
+      0px -10px 100px #7B96B8;
+  }
 }
-#corner1 {
-  background-color:#c00;
-  border-bottom-left-radius:300px;
-  box-shadow:0px 0px 8px 5px #06f;
-  top:0px;
-  right:0px;
-}
-#corner2 {
-  background-color:#06f;
-  border-top-right-radius:300px;
-  box-shadow:0px 0px 8px 5px #c00;
-  bottom:0px;
-  left:0px;
-}
-#corner3 {
-  background-color:#090;
-  border-top-left-radius:300px;
-  box-shadow:0px 0px 8px 5px #090;
-  bottom:0px;
-  right:0px;
-}
-*/
 /****************************************************/
 
 
