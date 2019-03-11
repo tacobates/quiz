@@ -1,7 +1,7 @@
 {
   "name":"Retro Video Game Quiz: 1940 to 2002 (the pre-steam era)",
   "order":"serial",
-
+  "time":"12",
 
 
   "questions":[
@@ -21,8 +21,8 @@
 
 ["When was Pong released by Atari?",
 "*1972",
-"1973",
 "1974",
+"1976",
 "1776",
 "Its creators wanted to call it Ping-Pong, but that name was trademarked"],
 
@@ -47,7 +47,7 @@
 "Al Gore",
 "Apparently Steve Jobs \"helped,\" but let's face it, we know who was the brains of that operation."],
 
-["True or False, aliens slowly speeding up and increasing the difficulty of \"Space Invaders\" was originally an accident.",
+["True or False, in \"Space Invaders\" aliens slowly speeding up and increasing the difficulty began as an accident.",
 "Pshhh... easy game.",
 "*True",
 "False",
@@ -97,10 +97,10 @@
 "As of 2019, Tetris is still the most sold video game of all time, although it's had several versions and releases."],
 
 ["In 1984's \"Beast\", you are a diamond pushing crosshatch blocks to crush beasts and their eggs.<br/>What ASCII character represents the beasts?",
-"&amp;",
-"B",
-"*H",
-"Hank McCoy",
+"<span class='terminal'>&amp;</span>",
+"<span class='terminal'>B</span>",
+"*<span class='terminal'>H</span>",
+"Dr. Henry 'Hank' McCoy",
 "Yes, believe it or not I played this game for hours on end. It may not have amazing graphics, but that doesn't mean it isn't fun!"],
 
 ["Kings Quest was released by...",
@@ -208,7 +208,7 @@
 "*All of the Above",
 "Split-screen allowed for up to 10 players, as long as they were willing to share a keyboard."],
 
-["True or False, Sonic, generally considered Sega's counterpart for Mario, didn't actually release until 1992",
+["True or False, Sonic, generally considered Sega's counterpart for Mario, didn't actually release until 1993",
 "I'm Outta Here!",
 "True",
 "*False",
@@ -227,7 +227,7 @@
 "*Jill Saves the Prince",
 "Jill Versus the Ape King",
 "Jill learns to talk in First Person",
-"This trilogy of games can often be purchased as a compilation and is well worth a playthrough."],
+"This trilogy of games can often be inexpensively purchased as a compilation and is well worth a playthrough."],
 
 ["Wolfenstein 3D rated itself as PC-13 for Profound Carnage.<br/>What was the lowest difficulty you could select?",
 "Baby wanna play.",
@@ -373,7 +373,7 @@
 "Undercover Nanotech Anti-Terrorist Coalition",
 "*United Nations Anti-Terrorist Coalition",
 "Useful Neighborhood Anti-Terrorist Coalition",
-"f<span style='font-weight:300;'>UN</span> b<span style='font-weight:300;'>AT</span> i<span style='font-weight:300;'>CO</span>ns",
+"<span style='font-weight:300;'>UN</span>der w<span style='font-weight:300;'>AT</span>er <span style='font-weight:300;'>CO</span>pulation",
 "Superhuman abilities through nanotech, magic, the force, or being in a simulation make it a lot easier to suspend disbelief."],
 
 ["Why does Master Chief have Cortana in Halo: Combat Evolved?",
