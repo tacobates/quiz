@@ -1,7 +1,8 @@
 {
+  "name":"Mario Bros Character Quiz",
   "intro":"How many characters from the Mario Bros franchise do you know?",
   "order":"random",
-  "time":"10",
+  "time":"12",
   "questions":[
 ["<table><tr><td><img src='img/characters/mario/admiral_bobbery.png' /></td><td>a bob-omb from Paper Mario: The Thousand-Year Door</td></tr></table>",
 "*Admiral Bobbery",
