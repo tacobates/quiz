@@ -8,7 +8,7 @@
   <script src="js/quizzer.js"></script>
   <script src="js/gamepad.js"></script>
 </head>
-<body>
+<body onload="checkWarnings()">
   <!-- Displays Control Form to setup the Quiz how you want -->
   <div id="controlPane" class="pane">
     <h3><span id='numPlayers'></span> <span id='numPlayersLabel'>Players</span> Detected</h3>
@@ -95,6 +95,9 @@
     <button onclick="roboSay('Do I raise my voice at the end of a question?', 'Microsoft Zira Desktop - English (United States)')">Zira</button>
     <br/><br/>
   </div>
+
+  <!-- Warning Pane displays errors like bad json in quiz files -->
+  <div id="warning" class="invisible"></div>
 </body>
 </html>
 
@@ -142,12 +145,55 @@ function getHtmlControls() {
 
 /** For <select> for Quiz names from ./data **/
 function getQuizzes() {
-  #TODO: actually search
-  return array(
-    'test'=>'EZ Test Quiz',
-    'mario_characters'=>'Characters from Mario Bros',
-    'q0001'=>'History of Video Games',
-  ); #TODO: delete fake ones
+  $dir = dirname(__FILE__).'/quiz_questions';
+  $files = scandir($dir);
+  $rtn = array();
+  foreach ($files as $file) {
+      if ('.json' == substr($file, -5)) {
+        $json = file_get_contents("$dir/$file");
+        $json = json_decode($json, true);
+        //Invalid JSON
+        if (null == $json) {
+            echo "<span class='warning'><h3>$file</h3>Bad JSON. Paste to <a href='https://jsonlint.com/' target='_blank'>jsonlint</a> for specific error</span>";
+            continue;
+        }
+        //Missing or Empty Questions Array
+        if (!array_key_exists('questions', $json) || count($json['questions']) == 0) {
+            echo "<span class='warning'><h3>$file</h3>Must specify a 'questions' array with at least 1 question</span>";
+            continue;
+        }
+        //Questions must all have 5 elements (Question + 4 Answers)
+        //AND exactly 1 should start with a * (flag for correct answer)
+        $badQ = false;
+        foreach ($json['questions'] as $q) {
+            $badQ = false;
+            if(count($q) < 5) { #Ensure 1 Q, and 4 Answers
+                echo "<span class='warning'><h3>$file</h3>Question must have 1 Q &amp; 4 A's:<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",json_encode($q),"</span>";
+                $badQ = true;
+                continue;
+            }
+            $numRight = 0;
+            for ($i=1; $i<=4; $i++) { #Ensure exactly 1 answer has an *
+                $char1 = substr($q[$i],0,1);
+                if ($char1 == '*')
+                    $numRight++;
+            }
+            if (1 != $numRight) {
+                echo "<span class='warning'><h3>$file</h3>Need exactly 1 right answer:<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",json_encode($q),"<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Right answer must start with *)</span>";
+                $badQ = true;
+                continue;
+            }
+        }
+        if ($badQ) //Skip to next Quiz, as this one had a bad question
+            continue;
+        $numQs = count($json['questions']);
+        $k = $v = substr($file,0,-5); #Use File Name for Display Name
+        if (array_key_exists('name', $json)) #Unless Json Name specified
+            $v = $json['name'];
+        $rtn[$k] = $v . " [$numQs Questions]"; #Key is File, Value is Name
+      }
+  }
+  return $rtn;
 }
 
 /** For <select> for Num Turns **/

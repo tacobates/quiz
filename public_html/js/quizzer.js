@@ -51,6 +51,21 @@ $(document).on('keyup', function(e) {
   }
 });
 
+/** Check for warnings to display **/
+function checkWarnings() {
+    var txt = '';
+    $('.warning').each(function(){
+        txt += '<div>' + this.innerHTML + '</div>';
+    });
+    if ('' != txt) {
+        var prefix = '<div id="warnClose" onclick="warnClose()">&times;</div>';
+        $('#warning').html(prefix + txt);
+        $('#warning').removeClass('invisible');
+    }
+}
+function warnClose() {
+    $('#warning').addClass('invisible');
+}
 
 /** Start the Quiz with selected params **/
 function quizFetch() {
