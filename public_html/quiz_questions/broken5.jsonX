@@ -1,0 +1,8 @@
+{
+  "name":"Broken on Purpose with Questions missing an * for a right answer",
+  "questions":[
+["Some Question","*Ans 1","Ans 2","Ans 3","Ans 4"],
+["Another Question","*Ans 1","Ans 2","Ans 3","Ans 4"],
+["A Question with no right answer","Ans 1","Ans 2","Ans 3","Ans 4"]
+  ]
+}
