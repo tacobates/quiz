@@ -22,6 +22,7 @@ var qid; //The quiz id (like "test")
 var qInterval; //Functions as the timer update & timeout for each question
 var qNumPlayers = 0; //Will get updates after gamepad.js sees how many are connected
 var qNumWrong = 0; //Checks if everyone has answered wrong so it can just move on
+var qPenalty = 0; //How much to subtract if a question is answered wrong
 var qScores = [0,0,0,0]; //Hold scores for up to 4 players
 var qStyle; //Type of Quiz ("buzz", "pub", or "speed")
 var qTime; //How long each question gets
@@ -38,6 +39,8 @@ var who = -3; //Dont listen until quiz is loaded
 
 /** Listen for "Spacebar" key to trigger like nextBtn does **/
 $(document).on('keyup', function(e) {
+  //console.log("Key Pressed: " + e.which);
+  var b = 66; //Key for "b" button to show/hide "bonus" pane
   var spacebar = 32; //key code for spacebar
   var tag = e.target.tagName.toLowerCase();
   if (tag == 'input' || tag == 'textarea')
@@ -48,6 +51,8 @@ $(document).on('keyup', function(e) {
       $('#nextBtn').addClass('invisible'); //Flag to avoice double press of spacebar
       questionAsk();
     }
+  } else if (e.which === b) { //Show/Hide bonus pane
+    $('.bonus').toggleClass('invisible');
   }
 });
 
@@ -110,6 +115,9 @@ function quizGetQuestions(id) {
     if ("time" in data)
       qTime = data.time;
 //qTime = 4; //TODO: deleteme. Shorter for testing
+    if ("penalty" in data) //otherwise leave it as 0
+      qPenalty = Math.abs(data.penalty); //so -1 won't -= -1 and give points for wrong answers
+    console.log("Penalty for Wrong Answers: " + qPenalty);
 
     //TODO: use qData.intro & qData.quips
 
@@ -267,7 +275,7 @@ function timerUpdate() {
 
     //Someone Buzzed in, so they lose points
     if (who >= 0) { //Not answering in pub/speed never loses points
-      qScores[who]--;
+      qScores[who] -= qPenalty;
       scoreShow();
       lockedPlayers[who] = true;
       $('#s'+who).removeClass('buzzedIn');
@@ -337,7 +345,7 @@ function answer(bNum, pNum) {
       wav('wrong');
     //TODO: trigger host insulting the contestants
 
-    if (qStyle == 'pub')
+    if (qStyle == 'pub' || qPenalty == 0) //TODO: make penalty more than a flag, but a scalar
       diff = 0; //No negative punishment for wrong answers in pub mode
     lockedPlayers[pNum] = true;
     $('#s'+pNum).removeClass('buzzedIn');

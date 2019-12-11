@@ -1,4 +1,8 @@
-<!DOCTYPE html>
+<?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+?><!DOCTYPE html>
 <html>
 <head>
   <title>40 Bit Quiz</title>
@@ -12,7 +16,7 @@
   <!-- Displays Control Form to setup the Quiz how you want -->
   <div id="controlPane" class="pane">
     <h3><span id='numPlayers'></span> <span id='numPlayersLabel'>Players</span> Detected</h3>
-    (to add players, connect controllers, hit a button on each &amp; refresh)
+    (to add players, connect controllers, hit a button on each &amp; click the "Redetect Gamepads" button)
     <br/><br/>
     <?php echo getHtmlControls(); ?>
   </div>
@@ -136,7 +140,13 @@ function getHtmlControls() {
         <td><span id='pLabel3' class='invisible'>Player 4:</span></td>
         <td><input id='p3' value='Guest' class='invisible' maxlength='12' /></td>
       </tr><tr>
-        <td colspan='4'><button onclick='quizFetch()' class='submitButton'>Start Quiz</button></td>
+        <td colspan='2'>
+            <button onclick='quizFetch()' class='submitButton'>Start Quiz</button>
+        </td>
+        <td></td>
+        <td>
+            <button onclick='numGP = null; gpPoll();' class='submitButton'>Redetect Gamepads</button>
+        </td>
       </tr>
     </tbody></table>
   ";
@@ -179,7 +189,7 @@ function getQuizzes() {
                     $numRight++;
             }
             if (1 != $numRight) {
-                echo "<span class='warning'><h3>$file</h3>Need exactly 1 right answer:<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",json_encode($q),"<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Right answer must start with *)</span>";
+                echo "<span class='warning'><h3>$file</h3>Need exactly 1 right answer:<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",htmlentities(json_encode($q)),"<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Right answer must start with *)</span>";
                 $badQ = true;
                 continue;
             }
